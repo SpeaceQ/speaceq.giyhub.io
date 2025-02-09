@@ -1,21 +1,240 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zh">
-    <head> <meta http-equiv="http://localhost/" Content="text/html;charset=utf8"/>
-           <link rel="jpg" type="https://img.te5.com/uploads/allimg/220210/197-220210094648-50.jpg"/>
-      <title>AK IOI</title>
-      <style>
-        body{text-align:center}
-      </style>
-    </head>
-    <body>
-      <h1>AK IOI</h1>
-    </body>
-    <h2>_Welcom to AK IOI_<h2>
-    <h2><font color="#D1D1D1">_________________________________________________________</font><h2>
-    <body>
-       <a href="https://www.luogu.com.cn" title"这个网站配不上网站中的大佬"><img src="https://cdn.luogu.com.cn/upload/usericon/178480.png"> <br> </a>
-    </body>
-    <h3>——无次数的沉沦就是为了苏醒。——<h2>
-    <h2><font color="#D1D1D1">_________________________________________________________</font><h3>
-    <h3><font color="#D1D1D1">—Time waits for no man.—</font><h2>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceQ's Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: rgb(119, 188, 172); /* 修改背景颜色 */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* 防止滚动条出现 */
+        }
+
+        /* 左侧目录框 */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7); /* 比背景颜色稍深 */
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            z-index: 1000;
+        }
+
+        .sidebar h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 5px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 右侧内容框 */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-left: 200px; /* 为左侧目录框留出空间 */
+        }
+
+        #textContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .letter {
+            margin: 0 5px;
+            font-size: 48px;
+            color: white; /* 将字体颜色改为白色 */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加文字阴影 */
+        }
+
+        .letter.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 动态渐变边框样式 */
+        .star-border-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1px 0;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            display: none; /* 初始隐藏 */
+            opacity: 0;
+            transition: opacity 1s ease; /* 淡入效果 */
+            width: 80%; /* 右侧内容框宽度 */
+            margin: 20px auto; /* 上下外边距 */
+        }
+
+        .border-gradient-bottom {
+            position: absolute;
+            width: 300%;
+            height: 50%;
+            opacity: 0.7;
+            bottom: -11px;
+            right: -250%;
+            border-radius: 50%;
+            animation: star-movement-bottom 3s linear infinite alternate;
+            z-index: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+        }
+
+        .border-gradient-top {
+            position: absolute;
+            opacity: 0.7;
+            width: 300%;
+            height: 50%;
+            top: -10px;
+            left: -250%;
+            border-radius: 50%;
+            animation: star-movement-top 3s linear infinite alternate;
+            z-index: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+        }
+
+        .inner-content {
+            position: relative;
+            background: linear-gradient(to bottom, #060606, #111);
+            border: 1px solid #222;
+            color: white;
+            font-size: 16px;
+            text-align: center; /* 文字居中 */
+            padding: 16px 26px; /* 增加左右间距 */
+            border-radius: 20px;
+            z-index: 1;
+            transition: background-color 0.3s ease;
+            width: 100%; /* 内容宽度 */
+        }
+
+        .inner-content:hover {
+            background: linear-gradient(to bottom, #111, #060606);
+        }
+
+        @keyframes star-movement-bottom {
+            0% {
+                transform: translate(0%, 0%);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-100%, 0%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes star-movement-top {
+            0% {
+                transform: translate(0%, 0%);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100%, 0%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h3>目录</h3>
+        <ul>
+            <li><a href="#introduction">引言</a></li>
+            <li><a href="#background">背景</a></li>
+            <li><a href="#methods">方法</a></li>
+            <li><a href="#results">结果</a></li>
+            <li><a href="#discussion">讨论</a></li>
+            <li><a href="#conclusion">结论</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div id="textContainer"></div>
+        <div class="star-border-container" id="blogContainer">
+            <div class="inner-content">
+                <h2 id="introduction">论如何使用意大利面搅拌42号混凝土</h2>
+                <p>
+                    在建筑领域，混凝土的搅拌一直是一项至关重要的工作。然而，你有没有想过，如果有一天，我们用意大利面来搅拌混凝土，会发生什么？本文将探讨这一奇特的想法，并尝试提供一些理论依据和实践建议。
+                </p>
+                <p id="background">
+                    首先，我们需要明确一点：意大利面和混凝土在物理性质上有很大的不同。意大利面是一种碳水化合物，而混凝土是一种由水泥、沙子和水组成的复合材料。然而，如果我们能够找到一种方法，将意大利面的柔韧性和混凝土的坚固性结合起来，那么我们可能会创造出一种全新的建筑材料。
+                </p>
+                <p id="methods">
+                    在实验过程中，我们尝试了多种方法，包括将意大利面切成小段，然后与混凝土混合。结果发现，这种混合物在一定程度上增加了混凝土的柔韧性，但同时也降低了其强度。因此，我们需要进一步研究，以找到最佳的混合比例。
+                </p>
+                <p id="results">
+                    除了实验，我们还对这种奇特的混合物进行了理论分析。我们认为，意大利面的纤维结构可能有助于分散混凝土中的应力，从而提高其抗裂性。然而，这种理论还需要更多的实验数据来支持。
+                </p>
+                <p id="discussion">
+                    总之，虽然使用意大利面搅拌混凝土听起来像是一个疯狂的想法，但通过科学的方法和实验，我们可能会发现一些有趣的结果。未来的研究可能会集中在如何优化这种混合物的性能，以及如何将其应用于实际的建筑项目中。
+                </p>
+                <p id="conclusion">
+                    本文总结了使用意大利面搅拌混凝土的初步研究结果，虽然目前还存在许多挑战，但这一研究方向具有潜在的创新性和实际应用价值。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const text = "Welcome";
+        const textContainer = document.getElementById('textContainer');
+        const blogContainer = document.getElementById('blogContainer');
+        const sidebar = document.getElementById('sidebar');
+
+        function splitAndAnimateText() {
+            for (let char of text) {
+                const letterElement = document.createElement('span');
+                letterElement.textContent = char;
+                letterElement.className = 'letter';
+                textContainer.appendChild(letterElement);
+
+                // 设置延迟时间，逐字显示
+                setTimeout(() => {
+                    letterElement.classList.add('show');
+                }, 100 * textContainer.children.length);
+            }
+
+            //
+            // 在所有字母显示完成后，设置一个延迟，然后隐藏“Welcome”并显示博客内容和目录框
+            setTimeout(() => {
+                textContainer.style.display = 'none'; // 隐藏“Welcome”
+                blogContainer.style.display = 'flex'; // 显示博客内容
+                blogContainer.style.opacity = 1; // 淡入效果
+                sidebar.style.opacity = 1; // 淡入效果
+            }, 100 * text.length + 1000); // 等待所有字母显示完成 + 1秒
+        }
+
+        // 调用函数，开始动画
+        splitAndAnimateText();
+    </script>
+</body>
 </html>
