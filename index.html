@@ -21,24 +21,27 @@
             top: 0;
             width: 200px;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.7); /* 比背景颜色稍深 */
+            background-color: #333; /* 实心背景颜色 */
             color: white;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center; /* 垂直居中 */
+            align-items: center; /* 水平居中 */
             z-index: 1000;
         }
 
         .sidebar h3 {
             margin: 0 0 10px 0;
+            text-align: center; /* 标题居中 */
         }
 
         .sidebar ul {
             list-style: none;
             padding: 0;
             margin: 0;
+            width: 100%; /* 宽度占满整个目录框 */
+            text-align: center; /* 文字居中 */
         }
 
         .sidebar ul li {
@@ -48,6 +51,8 @@
         .sidebar ul li a {
             color: white;
             text-decoration: none;
+            display: block; /* 使链接块级显示，宽度占满整个目录框 */
+            padding: 5px 0; /* 增加上下间距 */
         }
 
         /* 右侧内容框 */
@@ -56,7 +61,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
+            width: calc(100% - 200px); /* 为左侧目录框留出空间 */
             margin-left: 200px; /* 为左侧目录框留出空间 */
         }
 
@@ -210,7 +215,8 @@
         const blogContainer = document.getElementById('blogContainer');
         const sidebar = document.getElementById('sidebar');
 
-        function splitAndAnimateText() {
+        function splitAndAnimateText()
+        {
             for (let char of text) {
                 const letterElement = document.createElement('span');
                 letterElement.textContent = char;
@@ -223,7 +229,6 @@
                 }, 100 * textContainer.children.length);
             }
 
-            //
             // 在所有字母显示完成后，设置一个延迟，然后隐藏“Welcome”并显示博客内容和目录框
             setTimeout(() => {
                 textContainer.style.display = 'none'; // 隐藏“Welcome”
